@@ -1,0 +1,74 @@
+<mujoco>
+<!--    <include file="scene.xml"/>-->
+    <default class="main">
+<!--        <geom rgba="1 0 0 1"/>-->
+        <geom rgba="255 255 255 1"/>
+        <default class="sub">
+            <geom rgba="0 1 0 1"/>
+        </default>
+    </default>
+  <size njmax="8000" nconmax="4000"/>
+
+<!--    <asset>-->
+<!--        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>-->
+<!--        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2"-->
+<!--            width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>-->
+<!--        <texture name="texcarpet" type="2d" file="carpet.png"/>-->
+<!--        <texture name="texsponge" type="2d" file="sponge.png"/>-->
+<!--        <texture name="texmarble" type="cube" file="marble.png"/>-->
+<!--&lt;!&ndash;        <texture name=""&ndash;&gt;-->
+<!--        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>-->
+<!--        <material name="matcarpet" texture="texcarpet"/>-->
+<!--        <material name="matsponge" texture="texsponge" specular="0.3"/>-->
+<!--        <material name="matmarble" texture="texmarble" rgba=".7 .7 .7 1"/>-->
+<!--    </asset>-->
+  <worldbody>
+    <light cutoff="100" diffuse="1 1 1" dir="-0 0 -1" directional="true" exponent="1" pos="0 0 0.0" specular=".1 .1 .1"/>
+<!--rgba ="0.1 0.1 .1 0.5" -->
+    <geom rgba="0 0 0 0.1" conaffinity="1" density='0.' contype="1" condim="1" name="table" pos="0 0.0 0." size="2.8 2.8 0.1" type="plane" />
+
+      <body name="B3_5" pos="0 0 1">
+<!--          <camera name="track" mode="trackcom" pos="0 -1 1" xyaxes="1 0 0 0 1 1"/>-->
+    <freejoint name="r1"/>
+    <composite type="cloth" count="9 9 1" spacing="0.05" flatinertia="0.01">
+        <joint kind="main" damping="0.001"/>
+        <skin rgba="0.6 1 0.6 1" texcoord="true" inflate="0.005" subgrid="2"/>
+        <geom type="capsule" size="0.015 0.01" rgba=".8 .2 .1 1"/>
+    </composite>
+</body>
+    <!--  ================= SWIMMER ================= /-->
+<!--    <body name="B10" pos="0 0 1">-->
+<!--         <camera name="track" mode="trackcom" pos="0 -1 1" xyaxes="1 0 0 0 1 1" />-->
+<!--&lt;!&ndash;        <joint type="slide"  pos="0 0 1" name="slider1" axis="0 0 1"/>&ndash;&gt;-->
+<!--        <freejoint name="r1"/>-->
+<!--&lt;!&ndash;        <composite type="rope" count="21 1 1" spacing="0.04" offset="0 0 2">&ndash;&gt;-->
+
+<!--        <composite type="rope" count="21 1 1" spacing="0.04" offset="0 0 2">-->
+<!--            <joint kind="main" damping="0.005"/>-->
+<!--&lt;!&ndash;            rgba="0.8 0.2 0.1 1&ndash;&gt;-->
+<!--&lt;!&ndash;            <geom type="capsule" size=".01 .015" rgba=" 1. 0 0 1"/>&ndash;&gt;-->
+<!--            <geom type="capsule" size=".01 .015" rgba=" 1. 0 0 1"/>-->
+
+<!--&lt;!&ndash;            <pin coord="1" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="2" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="3" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="4" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="5" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="6" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="7" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <pin coord="21"/>&ndash;&gt;-->
+<!--        </composite>-->
+
+<!--    </body>-->
+
+  </worldbody>
+  <sensor>
+
+  </sensor>
+  <actuator>
+    <motor ctrllimited="true" ctrlrange="-1 1" gear="10.0" joint="r1"/>
+<!--    <motor ctrllimited="true" ctrlrange="-1 1" gear="150.0" joint="rot3"/>-->
+<!--      <motor ctrllimited="true" ctrlrange="-1 1" gear="150.0" joint="r1"/>-->
+  </actuator>
+
+</mujoco>

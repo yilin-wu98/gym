@@ -116,12 +116,19 @@ class MujocoEnv(gym.Env):
         self.sim.set_state(new_state)
         self.sim.forward()
 
+
     @property
     def dt(self):
         return self.model.opt.timestep * self.frame_skip
 
     def do_simulation(self, ctrl, n_frames):
         self.sim.data.ctrl[:] = ctrl
+        for _ in range(n_frames):
+            self.sim.step()
+
+    # simulation function designed for rope
+    def do_simulation_external(self,exctrl,n_frames):
+        self.sim.data.xfrc_applied[21,:2]=exctrl
         for _ in range(n_frames):
             self.sim.step()
 
@@ -142,7 +149,6 @@ class MujocoEnv(gym.Env):
             # Extract depth part of the read_pixels() tuple
             data = self._get_viewer(mode).read_pixels(width, height, depth=True)[1]
             # original image is upside-down, so flip it
-            return data[::-1, :]
         elif mode == 'human':
             self._get_viewer(mode).render()
 
@@ -158,6 +164,7 @@ class MujocoEnv(gym.Env):
             if mode == 'human':
                 self.viewer = mujoco_py.MjViewer(self.sim)
             elif mode == 'rgb_array' or mode == 'depth_array':
+                # import ipdb;ipdb.set_trace()
                 self.viewer = mujoco_py.MjRenderContextOffscreen(self.sim, -1)
 
             self.viewer_setup()

@@ -331,6 +331,35 @@ register(
     entry_point='gym.envs.mujoco:HumanoidStandupEnv',
     max_episode_steps=1000,
 )
+# new
+register(
+    id='Rope-v0',
+    entry_point='gym.envs.mujoco:RopeEnv',
+    max_episode_steps=1000,
+    reward_threshold=360.0,
+)
+
+register(
+    id='Rope-v1',
+    entry_point='gym.envs.mujoco.rope_v1:RopeEnv',
+    max_episode_steps=1000,
+    reward_threshold=360.0,
+)
+
+register(
+    id='Cloth-v0',
+    entry_point='gym.envs.mujoco.cloth_v0:ClothEnv',
+    max_episode_steps=1000,
+)
+
+
+
+register(
+    id='PointMass-v0',
+    entry_point='gym.envs.mujoco:PointMass',
+    max_episode_steps=1000,
+    # reward_threshold=360.0,
+)
 
 # Robotics
 # ----------------------------------------
